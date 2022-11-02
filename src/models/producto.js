@@ -2,26 +2,25 @@ import mongoose, {Schema} from "mongoose";
 
 const productoSchema = new Schema({
         nombreProducto:{
-            type:String,
+            type: String,
             required: true,
-            unique:true,
+            unique: true,
             minLength:2,
             maxLength:100
         },
         precio:{
             type: Number,
-            required:true,
+            required: true,
             min:1,
             max:10000
         },
         imagen:{
             type: String,
-            required:true,
+            required: true,
         },
         categoria:{
             type: String,
             required: true,
-
         }
 });
 

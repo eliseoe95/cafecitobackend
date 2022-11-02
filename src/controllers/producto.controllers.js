@@ -45,19 +45,34 @@ export const crearProductos = async (req, res)=>{
         })
     }}
 
-    export const editarProducto = async(req,res)=>{
+    export const editarProducto = async( req ,res)=>{
         try {
             //extraer el parametro de la ruta y los datos que quiero actualizar
             //solicitar a la BD actualizar el producto
             await Producto.findByIdAndUpdate(req.params.id, req.body);
             //respondemos al frontend
-            req.status(200).json({
+            res.status(200).json({
                 mensaje:'El producto fue editado con exito'
             })
         } catch (error) {
             console.log(error);
             res.status(400).json({
                 mensaje:'Error al intentar editar un producto'
+            })
+        }
+    }
+    export const borrarProducto = async(req,res)=>{
+        try {
+            //buscar el id de la ruta, luego pedir a la BD borrar ese producto
+            await Producto.findByIdAndDelete(req.params.id);
+            //enviar respuesta al frontend
+            res.status(200).json({
+                mensaje:'El producto fue borrado con exito'
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(404).json({
+                mensaje:'Error al intentar borrar un producto'
             })
         }
     }

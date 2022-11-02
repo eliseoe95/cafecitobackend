@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { crearProductos, listarProductos, obtenerProductos, editarProducto } from '../controllers/producto.controllers';
+import { crearProductos, listarProductos, obtenerProductos, editarProducto, borrarProducto } from '../controllers/producto.controllers';
 
 const router = Router();
 
 router.route('/productos').get(listarProductos).post(crearProductos);
-router.route('/productos/:id').get(obtenerProductos).put(editarProducto)
+router.route('/productos/:id').get(obtenerProductos).put(editarProducto).delete(borrarProducto)
 // app.get('/prueba', (req, res)=>{
 //     res.send('esto es una prueba de una peticion get')
 // })
