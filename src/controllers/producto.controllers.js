@@ -1,16 +1,8 @@
-import { response } from 'express';
+import { validationResult } from 'express-validator';
 import Producto from '../models/producto';
 
 export const listarProductos = async(req, res)=>{
     try {
-        //trabajar con el resultado de la validacion
-        const errors = validationResult(req);
-        //errors.isEmpty() true si esta bien, false si hay un error
-        if(!errors.isEmpty()){
-            return res.status(400).json({
-                errores: errors.array()
-            })
-        }
         //buscar en la BD la collection de productos
         const productos = await Producto.find();
         //envio la respuesta al front end
@@ -40,6 +32,12 @@ export const obtenerProductos = async(req, res)=>{
 }
 export const crearProductos = async (req, res)=>{
     try {
+        const errors= validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json({
+                errores: errors.array()
+            })
+        }
         console.log(req.body)
         const productoNuevo = new Producto(req.body);
         await productoNuevo.save();
