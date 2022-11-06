@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { check } from "express-validator";
-import { crearUsuario, listarUsuarios, loguearUsuario } from "../controllers/usuario.controllers";
-// import Usuarios from "../models/usuario";
+import { crearUsuario, listarUsuarios } from "../controllers/usuario.controllers";
+
 
 const router = Router();
 
@@ -29,14 +29,6 @@ router.route('/usuarios').get(listarUsuarios).post([
     .withMessage('El email ingresado no es correcto')
     .matches( /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i)
     .withMessage('El email ingresado debe ser valido')
-    // .custom((value)=>{ 
-    //     const usu = Usuarios.find((usuario)=> usuario.email === value)
-    //         if(usu){
-    //             throw new Error('El email ya existe');
-    //         }else{
-    //             return true;
-    //         }
-    // })
     ,
     check('contrasenia')
     .notEmpty()
@@ -44,6 +36,6 @@ router.route('/usuarios').get(listarUsuarios).post([
     .isLength({
         min:6})
     .withMessage('La contraseña debe tener al menos 6 caracteres')
-],crearUsuario).post(loguearUsuario)
+],crearUsuario)
 
 export default router;

@@ -36,35 +36,3 @@ export const crearUsuario = async(req, res)=>{
         })
     }
 }
-export const loguearUsuario = async(req, res)=>{
-    try {
-        const errors = validationResult(req);
-        if(!errors.isEmpty()){
-            return res.status(400).json({
-                errores: errors.array()
-            })
-        }
-        console.log(req.body)
-        const usuarioLogueado = await Usuario.find((req.body.email).exc());
-        if(usuarioLogueado){
-            if(req.body.contrasenia === usuarioLogueado.contrasenia){
-                res.status(201).json({
-                    mensaje:'El usuario fue creado con exito'
-                })
-            }else{
-                res.status(404).json({
-                    mensaje: 'El usuario o contraseña ingreado no es valido'
-                })
-            }
-        }
-        res.status(201).json({
-            mensaje:'El usuario fue creado con exito'
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(404).json({
-            mensaje:'ocurrio un error al intentar registrar un usuario'
-        })
-    }
-}
-

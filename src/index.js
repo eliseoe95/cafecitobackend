@@ -3,7 +3,10 @@ import cors from 'cors';
 import morgan from 'morgan';
 import path from 'path';
 import productoRouter from './routes/productos.routes'
+
 import usuarioRouter from './routes/usuarios.routes'
+
+import loginRouter from './routes/login.routes'
 
 //llamar a la conexion a la BD
 import './database';
@@ -31,3 +34,4 @@ app.use(express.static(path.join(__dirname,'../public')))
 //http://localhost:4000/apicafe/usuarios
 app.use('/apicafe', productoRouter)
 app.use('/apicafe', usuarioRouter)
+app.use('/apicafe', loginRouter)
