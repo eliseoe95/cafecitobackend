@@ -3,7 +3,7 @@ import Producto from '../models/producto';
 
 export const listarProductos = async(req, res)=>{
     try {
-        //buscar en la BD la collection de productos
+        //buscar en la BD la collection de usuarios
         const productos = await Producto.find();
         //envio la respuesta al front end
         res.status(200).json(productos);
